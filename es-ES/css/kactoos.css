@@ -1,0 +1,194 @@
+/* 
+    Document   : kactoos
+    Created on : 18/09/2010, 11:45:19 AM
+    Author     : Willington Vega
+    Description: Kactoos Widget style
+*/
+
+body {
+    margin: 0;
+    width: 296px;
+    height: 206px;
+    font-family: Calibri, Tahoma, sans-serif;
+}
+a {
+    outline: 0;
+}
+
+
+#content {
+    /*background: #28c240;*/
+}
+
+/* Navigation */
+
+.navigation {
+    position: absolute;
+    bottom: 16px; left: 21px;
+    margin: 0; padding: 0;
+    width: 259px; height: 20px;
+    font-size: 11px;
+    text-align: center;
+    list-style-type: none;
+    color: #444;
+}
+.navigation li {
+    float: left;
+    width: 16px;
+}
+.navigation li.previous {
+    margin-left: 74px;
+}
+.navigation li.label {
+    margin: 0 5px;
+    width: 40px;
+    text-align: center;
+}
+.navigation li.search {
+    float: right;
+}
+.navigation a {
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+.navigation a.products {
+    background: url(/images/home.png) no-repeat;
+}
+.navigation a.search {
+    background: url(/images/search.png) no-repeat;
+}
+.navigation a.previous {
+    background: url(/images/arrow-up-off.png);
+}
+.navigation a.next {
+    background: url(/images/arrow-down-off.png);
+}
+.navigation a.previous:hover {
+    background: url(/images/arrow-up-on.png);
+}
+.navigation a.next:hover {
+    background: url(/images/arrow-down-on.png);
+}
+.navigation a.previous-disabled {
+    background: url(/images/arrow-up-off.png);
+    visibility: hidden;
+}
+.navigation a.next-disabled {
+    background: url(/images/arrow-down-off.png);
+    visibility: hidden;
+}
+.navigation a.products {
+}
+.navigation a.search {
+}
+.navigation span {}
+
+/* Widget */
+
+.widget {
+    width: 302px;
+    height: 206px;
+}
+
+/* Kactoos Search Widget */
+
+#kactoos-search {
+    text-align: center;
+}
+#kactoos-search img {
+    margin: 30px 0 0;
+}
+#kactoos-search form {
+    margin: 0;
+}
+#kactoos-search form input {
+    margin: 0;
+    padding: 4px;
+    width: 213px;
+    height: 26px;
+    border-color: #00704A;
+    border-color: #75A641;
+    border: 2px solid #111;
+    line-height: 14px;
+    text-align: left;
+}
+#kactoos-search form a.go, #kactoos-search a.button {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    background: url(/images/search.png) center center no-repeat;
+}
+#kactoos-search ul {
+    margin: 10px 0 0;
+    padding: 0;
+    width: 56px;
+    list-style-type: none;
+    text-align: center;
+}
+#kactoos-search ul li.first {
+    float: left;
+}
+#kactoos-search ul li.last {
+    float: right;
+}
+
+/* Kactoos Explorer Widget */
+
+#kactoos-explorer {
+    padding: 21px 21px 21px 20px;
+    font-size: 12px;
+}
+#kactoos-explorer .container {
+    position: relative;
+    width: 260px;
+    height: 147px;
+    overflow: hidden;
+}
+#kactoos-explorer ul.products-list {
+    position: absolute;
+    top: 0; left: 0;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+#kactoos-explorer ul.products-list li {
+    padding: 4px;
+    width: 259px;
+    height: 33px;
+    border-bottom: 1px dotted #30452D;
+}
+#kactoos-explorer ul.products-list li.hover {
+    background: #A7CC7E;
+}
+#kactoos-explorer ul.products-list li.highlight {
+    background: #DEE697;
+}
+#kactoos-explorer ul.products-list li span.name {
+    display: inline-block;
+    width: 259px;
+    height: 14px;
+    line-height: 14px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+#kactoos-explorer ul.products-list li span.price {
+    font-weight: bold;
+    font-size: 11px;
+}
+#kactoos-explorer ul.products-list li span.label {
+    color: #444;
+}
+#kactoos-explorer ul.products-list li a.star {
+    float: right;
+    width: 14px;
+    height: 14px;
+    background: url(/images/star.png) no-repeat;
+}
+#kactoos-explorer ul.products-list li.starred a.star {
+    background: url(/images/delete.png) no-repeat;
+}
+#kactoos-explorer ul.products-list li.starred-in-search a.star {
+    display: none;
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<gadget>
+    <name>Kactoos</name>
+    <description>Un Gadget para "vigilar" productos en Kactoos</description>
+    <version>1.0.0.0</version>
+    <hosts>
+        <host name="sidebar">
+            <base type="HTML" apiVersion="1.0.0" src="kactoos.html" />
+            <permissions>Full</permissions>
+            <platform minPlatformVersion="1.0" />
+        </host>
+    </hosts>
+    <author name="Willington Vega Cardona">
+        <info url="http://wvega.com/" text="Blog" />
+    </author>
+    <copyright>2010 Willington Vega Cardona</copyright>
+    <icons>
+        <icon src="images/icon.png" />
+    </icons>
+</gadget>
