@@ -2,7 +2,7 @@
     Document   : kactoos
     Created on : 18/09/2010, 11:45:19 AM
     Author     : Willington Vega
-    Description: Kactoos Gadget style
+    Description: Kactoos Widget style
 */
 
 body {
@@ -164,7 +164,7 @@ a {
 #kactoos-explorer ul.products-list li.highlight {
     background: #DEE697;
 }
-#kactoos-explorer ul.products-list li span.name {
+#kactoos-explorer ul.products-list li a.name {
     display: inline-block;
     width: 259px;
     height: 14px;

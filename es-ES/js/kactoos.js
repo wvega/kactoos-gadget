@@ -43,22 +43,31 @@
                 }
                 $(event.target).blur();
             });
-
             this.element.find('.navigation a.search').click(function(event) {
-                event.preventDefault(); widget.search(); $(event.target).blur();
+                event.preventDefault();widget.search();$(event.target).blur();
+            });            
+            this.element.find('.navigation a.previous').click(function(event) {
+                event.preventDefault();
+                widget.widgets.explorer.move('previous');
+                $(event.target).blur();
+            });
+            this.element.find('.navigation a.next').click(function(event) {
+                event.preventDefault();
+                widget.widgets.explorer.move('next');
+                $(event.target).blur();
             });
 
             // the thing
             var timeout = 600000;
             setTimeout(function(){
-                widget.update(); setTimeout(arguments.callee, timeout);
+                widget.update();setTimeout(arguments.callee, timeout);
             }, timeout);
         },
 
         expose: function(widget) {
             for (var i in this.widgets) {
                 if (this.widgets.hasOwnProperty(i)) {
-                    this.widgets[i].element.hide();
+                    this.widgets[i].hide();
                 }
             }
             widget.show();
@@ -79,6 +88,7 @@
                 var product = {name: p.nombre_producto, id: p.id_producto};
                 product.price = p.precio_actual ? p.precio_actual : p.precio_msrp;
                 product.active = p.activo;
+                product.url = p.short_url ? p.short_url : '#nowhere';
                 products.push(product);
             });
             return products;
@@ -245,18 +255,9 @@
                     kactoos.add(li.data('product'));
                     li.addClass('starred-in-search');
                 }
-            });
-
-            this.element.find('.navigation').delegate('a', 'click', function(event) {
+            }).delegate('ul.products-list li a.name[href="#nowhere"]', 'click', function(event) {
                 event.preventDefault();
-                var link = $(event.target);
-                if (link.hasClass('previous')) {
-                    widget.move('previous');
-                    link.blur();
-                } else if (link.hasClass('next')) {
-                    widget.move('next');
-                    link.blur();
-                }
+                $(event.target).css('color', '#DDD').blur();
             });
         },
         
@@ -264,10 +265,12 @@
             kactoos.previous.removeClass('next-disabled');
             kactoos.next.removeClass('next-disabled');
             this.element.fadeIn();
+            this.list.css({top: 0});
             this.active = true;
         },
 
         hide: function() {
+            kactoos.label.text('');
             this.element.hide();
             this.active = false;
         },
@@ -276,9 +279,13 @@
             var widget = this, list = this.list.empty(), item;
 
             // set up navigation
-            this.pages = Math.ceil(products.length / 4);
+            this.page = 1;this.pages = Math.ceil(products.length / 4);
             //kactoos.label.text('' + (((this.page - 1) * 4) + 1) + ' al ' + (this.page * 4) + ' de ' + products.length);
-            kactoos.label.text(' ' + this.page + ' de ' + this.pages + ' ');
+            if (this.pages > 0) {
+                kactoos.label.text(' ' + this.page + ' de ' + this.pages + ' ');
+            } else {
+                kactoos.label.text('0 de 0');
+            }
 
             if (this.pages == 1) {
                 kactoos.previous.addClass('previous-disabled');
@@ -293,42 +300,43 @@
                 item = widget.blueprint.clone();
                 item.addClass(product.active ? 'active' : 'inactive');
                 item.addClass(product.index ? 'starred' : 'x');
-                item.find('span.name').text(widget.trim(product.name));
+                item.find('a.name').text(widget.trim(product.name)).attr('title', product.name).attr('href', product.url);
                 item.find('span.price').text(widget.format(product.price));
                 item.find('a.star').attr('title', product.index ? 'Dejar de observar este producto' : 'Observar este producto');
                 item.data('product', product);
                 list.append(item);
             });
 
-            this.home = home; this.page = 1;
+            this.home = home;
         },
 
         categories: function(categories) {},
 
         replace: function(product) {
             // only replace items when viewing wathced products
-            if (!this.home) { return; }
+            if (!this.home) {return;}
             
             var widget = this, list = this.list, p, item, li;
             this.list.find('li').each(function(i, element) {
-                li = $(element); p = li.data('product');
+                li = $(element);p = li.data('product');
                 if (p.id == product.id) {
                     item = widget.blueprint.clone();
                     item.addClass('highlight');
                     item.addClass(product.active ? 'active' : 'inactive');
                     item.addClass(product.index ? 'starred' : 'x');
-                    item.find('span.name').text(widget.trim(product.name));
+                    item.find('a.name').text(widget.trim(product.name)).attr('title', product.name).attr('href', product.url);
                     item.find('span.price').text(widget.format(product.price));
                     item.find('a.star').attr('title', product.index ? 'Dejar de observar este producto' : 'Observar este producto');
                     item.data('product', product);
                     // un-highlight
-                    item.one('mouseover', function() { item.removeClass('highlight'); });
+                    item.one('mouseover', function() {item.removeClass('highlight');});
                     li.replaceWith(item);
                 }
             });
         },
 
         move: function(direction) {
+            if (this.pages == 0) {return;}
             if (direction == 'previous') {
                 this.page = this.page > 1 ? this.page - 1 : this.pages;
             } else {
@@ -362,6 +370,6 @@
     }
 
     // Let the show begin!
-    $(function(){ kactoos = $('#content').Kactoos(); kactoos.search(); });
+    $(function(){kactoos = $('#content').Kactoos();kactoos.search();});
     
 })(jQuery);
