@@ -300,7 +300,7 @@
                 list.append(item);
             });
 
-            this.home = home;
+            this.home = home; this.page = 1;
         },
 
         categories: function(categories) {},
@@ -362,6 +362,6 @@
     }
 
     // Let the show begin!
-    $(function(){kactoos = $('#content').Kactoos();kactoos.search();});
+    $(function(){ kactoos = $('#content').Kactoos(); kactoos.search(); });
     
 })(jQuery);
